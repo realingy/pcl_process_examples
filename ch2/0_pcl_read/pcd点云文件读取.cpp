@@ -16,7 +16,6 @@ void viewerOneOff(pcl::visualization::PCLVisualizer & viewer)
 
 int main()
 {
-#if 1
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
 
 	char strfilepath[256] = "rabbit.pcd";
@@ -30,8 +29,13 @@ int main()
 
 	viewer.showCloud(cloud);
 	viewer.runOnVisualizationThreadOnce(viewerOneOff);
+
+	for (int i = 0; i < 10; i++)
+	{
+		cout << (float)cloud->points[i].x << " " << (float)cloud->points[i].y << " " << (float)cloud->points[i].z << endl;
+	}
+
 	system("pause");
-#endif
 	return 0;
 }
 
