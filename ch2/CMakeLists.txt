@@ -10,5 +10,6 @@ add_subdirectory(1_pcd2txt)
 add_subdirectory(2_txt2pcd)
 add_subdirectory(3_mypcd2txt)
 add_subdirectory(4_pcdwr)
+add_subdirectory(5_kd-tree)
 
 
