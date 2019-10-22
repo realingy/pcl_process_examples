@@ -61,6 +61,7 @@ void readPCDfile(const std::string finname, const std::string foutname)
 	}
 
 	std::cout << std::endl;
+	std::cout << "data type: " << data_type << std::endl;
 	std::cout << "start to read point ....." << std::endl;
 	std::vector<PointXYZ> cloud;
 	PointXYZ p;
