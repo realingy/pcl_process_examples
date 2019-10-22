@@ -53,7 +53,7 @@ int main()
 	// 建立kdtree
 	//pcl::KdTreeFLANN<PointT>::Ptr tree(new pcl::KdTreeFLANN<PointT>);
 	pcl::search::KdTree<PointT>::Ptr tree1(new pcl::search::KdTree<PointT>);
-	pcl::BilateralFilter<PointT> bf;
+	pcl::BilateralFilter<PointT> bf; //双边滤波
 	bf.setInputCloud(cloud);
 	bf.setSearchMethod(tree1);
 	bf.setHalfSize(1);
