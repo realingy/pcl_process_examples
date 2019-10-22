@@ -29,7 +29,8 @@ include_directories(${PCL_ROOT}/include/pcl-1.9)
 # 查找源文件
 aux_source_directory(. DIR_SRCS)
 
-add_executable(00_pcd_read ${DIR_SRCS})
+set(EXE_NAME 01_pcd2txt)
+add_executable(${EXE_NAME} ${DIR_SRCS})
 
 # target_link_libraries(pcd_write_test ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES})
-target_link_libraries(00_pcd_read ${PCL_LIBRARIES})
+target_link_libraries(${EXE_NAME} ${PCL_LIBRARIES})

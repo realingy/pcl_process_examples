@@ -24,7 +24,7 @@ int main()
 		return -1;
 	}
 
-	cout << cloud->points.size() << endl;
+	cout << "points count: " << cloud->points.size() << endl << endl;
 	pcl::visualization::CloudViewer viewer("Cloud Viewer"); //创建viewer对象
 
 	viewer.showCloud(cloud);
@@ -32,7 +32,7 @@ int main()
 
 	for (int i = 0; i < 10; i++)
 	{
-		cout << (float)cloud->points[i].x << " " << (float)cloud->points[i].y << " " << (float)cloud->points[i].z << endl;
+		cout << "\t" << (float)cloud->points[i].x << " " << (float)cloud->points[i].y << " " << (float)cloud->points[i].z << endl;
 	}
 
 	system("pause");

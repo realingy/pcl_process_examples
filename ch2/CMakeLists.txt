@@ -6,3 +6,4 @@ project(MY_PCL_PROJECT_CH2)
 include_directories(${CMAKE_SOURCE_DIR}/..)
 
 add_subdirectory(0_pcl_read)
+add_subdirectory(1_pcd2txt)
