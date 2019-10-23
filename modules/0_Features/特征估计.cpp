@@ -39,8 +39,8 @@ int main()
 	// cloud_normals->points.size () should have the same size as the input cloud->points.size ()
 	cout << "there are " << cloud_normals->points.size() << " points after estimate." << endl;
 
-//	pcl::visualization::CloudViewer viewer("Cloud Viewer"); //创建viewer对象
-//	viewer.showCloud(cloud_normals);
+	// pcl::visualization::CloudViewer viewer("Cloud Viewer"); //创建viewer对象
+	// viewer.showCloud(cloud_normals);
 }
 
 
