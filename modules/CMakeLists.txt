@@ -6,5 +6,6 @@ project(PCL_PROJECT_MODULES)
 include_directories(${CMAKE_SOURCE_DIR}/..)
 
 add_subdirectory(0_Features)
+add_subdirectory(1_Features)
 
 
