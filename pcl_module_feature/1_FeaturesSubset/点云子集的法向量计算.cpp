@@ -1,17 +1,15 @@
+// ¼ÆËãµãÔÆµÄÄ³×Ó¼¯µÄ·¨ÏòÁ¿
 #include <pcl/point_types.h>
-#include <pcl/features/normal_3d.h>
 #include <pcl/io/pcd_io.h>
 #include <pcl/visualization/cloud_viewer.h>
-#include <pcl/surface/gp3.h>
+#include <pcl/features/normal_3d.h>
+#include <pcl/filters/extract_indices.h>
 #include <iostream>
-
-using namespace std;
 
 int main()
 {
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
 
-	//... read, pass in or create a point cloud ...
 	if (pcl::io::loadPCDFile<pcl::PointXYZ>("table_scene_lms400.pcd", *cloud) == -1)
 	{
 		PCL_ERROR("Cloudn't read file!");
@@ -19,51 +17,54 @@ int main()
 	}
 	cout << "there are " << cloud->points.size() << " points before estimate." << endl;
 
-	// åˆ›å»ºæ³•è®¡ç®—ç±»ï¼Œä¼ é€’å¾…å¤„ç†ç‚¹äº‘
+	// ´´½¨Ë÷Òı¼¯
+	std::vector<int> indices(std::floor(cloud->points.size() / 10));
+	for (std::size_t i = 0; i < indices.size(); ++i)
+		indices[i] = i;
+
 	pcl::NormalEstimation<pcl::PointXYZ, pcl::Normal> ne;
 	ne.setInputCloud(cloud);
 
-	// åˆ›å»ºç©ºkdæ ‘ï¼Œä¼ é€’ç»™æ³•çº¿è®¡ç®—ç±»ï¼Œkdæ ‘å°†åœ¨è¾“å…¥ç‚¹äº‘ä¸Šè¿›è¡Œè¿‘é‚»ç‚¹é›†æœç´¢
+	boost::shared_ptr<std::vector<int> > indicesptr(new std::vector<int>(indices));
+	ne.setIndices(indicesptr);
+
 	pcl::search::KdTree<pcl::PointXYZ>::Ptr tree(new pcl::search::KdTree<pcl::PointXYZ>());
 	ne.setSearchMethod(tree);
 
-	// æ³•çº¿é›†åˆ
 	pcl::PointCloud<pcl::Normal>::Ptr cloud_normals(new pcl::PointCloud<pcl::Normal>);
 
-	// ä½¿ç”¨åŠå¾„ä¸º3cmçš„çƒä½“ä¸­çš„æ‰€æœ‰è¿‘é‚»ç‚¹
 	ne.setRadiusSearch(0.03);
 
-	// è®¾ç½®éœ€è¦æœç´¢çš„è¿‘é‚»ç‚¹æ•°é‡
-	// ne.setKSearch(20);
-
-	// è®¡ç®—æ³•çº¿
 	ne.compute(*cloud_normals);
 
 	cout << "there are " << cloud_normals->points.size() << " points after estimate." << endl;
 
-	//å°†ç‚¹äº‘æ•°æ®ä¸æ³•å‘ä¿¡æ¯æ‹¼æ¥
-	pcl::PointCloud<pcl::PointNormal>::Ptr cloud_with_normals(new pcl::PointCloud<pcl::PointNormal>);
-	pcl::concatenateFields(*cloud, *cloud_normals, *cloud_with_normals);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_extract(new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::ExtractIndices<pcl::PointXYZ> extract;
+	extract.setInputCloud(cloud);
+	extract.setIndices(indicesptr);
+	extract.setNegative(false);//Èç¹ûÉèÎªtrue,¿ÉÒÔÌáÈ¡Ö¸¶¨indexÖ®ÍâµÄµãÔÆ
+	extract.filter(*cloud_extract);
 
-	/*å›¾å½¢æ˜¾ç¤ºæ¨¡å—*/
-	//æ˜¾ç¤ºè®¾ç½®
+	/*Í¼ĞÎÏÔÊ¾Ä£¿é*/
+	//ÏÔÊ¾ÉèÖÃ
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer(new pcl::visualization::PCLVisualizer("3D Viewer"));
 
-	//è®¾ç½®èƒŒæ™¯è‰²
+	//ÉèÖÃ±³¾°É«
 	viewer->setBackgroundColor(0, 0, 0.7);
 
-	//è®¾ç½®ç‚¹äº‘é¢œè‰²ï¼Œè¯¥å¤„ä¸ºå•ä¸€é¢œè‰²è®¾ç½®
+	//ÉèÖÃµãÔÆÑÕÉ«£¬¸Ã´¦Îªµ¥Ò»ÑÕÉ«ÉèÖÃ
 	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> single_color(cloud, 0, 255, 0);
 
-	//æ·»åŠ éœ€è¦æ˜¾ç¤ºçš„ç‚¹äº‘æ•°æ®
-	viewer->addPointCloud<pcl::PointXYZ>(cloud, single_color, "sample cloud");
+	//Ìí¼ÓĞèÒªÏÔÊ¾µÄµãÔÆÊı¾İ
+	viewer->addPointCloud<pcl::PointXYZ>(cloud_extract, single_color, "sample cloud");
 
-	//è®¾ç½®ç‚¹æ˜¾ç¤ºå¤§å°
+	//ÉèÖÃµãÏÔÊ¾´óĞ¡
 	viewer->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 1, "sample cloud");
 
-	//æ·»åŠ éœ€è¦æ˜¾ç¤ºçš„ç‚¹äº‘æ³•å‘ã€‚cloudä¸ºåŸå§‹ç‚¹äº‘æ¨¡å‹ï¼Œnormalä¸ºæ³•å‘ä¿¡æ¯ï¼Œ10è¡¨ç¤ºéœ€è¦æ˜¾ç¤ºæ³•å‘çš„ç‚¹äº‘é—´éš”ï¼Œå³æ¯10ä¸ªç‚¹æ˜¾ç¤ºä¸€æ¬¡æ³•å‘ï¼Œï¼•è¡¨ç¤ºæ³•å‘é•¿åº¦ã€‚
-	//viewer->addPointCloudNormals<pcl::PointXYZ, pcl::Normal>(cloud, cloud_normals, 10, 5, "normals");
-	viewer->addPointCloudNormals<pcl::PointXYZ, pcl::Normal>(cloud, cloud_normals);
+	//Ìí¼ÓĞèÒªÏÔÊ¾µÄµãÔÆ·¨Ïò¡£cloudÎªÔ­Ê¼µãÔÆÄ£ĞÍ£¬normalÎª·¨ÏòĞÅÏ¢£¬10±íÊ¾ĞèÒªÏÔÊ¾·¨ÏòµÄµãÔÆ¼ä¸ô£¬¼´Ã¿10¸öµãÏÔÊ¾Ò»´Î·¨Ïò£¬£µ±íÊ¾·¨Ïò³¤¶È¡£
+	//viewer->addPointCloudNormals<pcl::PointXYZ, pcl::Normal>(cloud_extract, cloud_normals, 10, 5, "normals");
+	viewer->addPointCloudNormals<pcl::PointXYZ, pcl::Normal>(cloud_extract, cloud_normals);
 
 	while (!viewer->wasStopped())
 	{
@@ -73,7 +74,6 @@ int main()
 
 	return 0;
 }
-
 
 
 
