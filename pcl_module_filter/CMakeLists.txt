@@ -11,4 +11,4 @@ add_subdirectory(3_StatisticalOutlierRemoval)
 add_subdirectory(4_ProjectInliers)
 # add_subdirectory(5_BilateralFilter)
 add_subdirectory(6_ExtractIndices)
-
+add_subdirectory(7_OutlinerRemoval2)
