@@ -8,4 +8,6 @@ include_directories(${CMAKE_SOURCE_DIR}/..)
 add_subdirectory(0_BilateralFilters)
 add_subdirectory(1_PassThrough)
 add_subdirectory(2_VoxelGrid)
+add_subdirectory(3_StatisticalOutlierRemoval)
+
 
