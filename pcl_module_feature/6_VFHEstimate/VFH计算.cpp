@@ -42,11 +42,12 @@ int main()
 
 	vfh.compute(*vfhs);
 
-	// vfhs->points.size () should be of size 1*
+	// vfhs->points.size () should be of size 1
 	cout << "there are " << vfhs->points.size() << " points after vfh estimate." << endl;
 
 	pcl::visualization::PCLPlotter plotter;
 	plotter.addFeatureHistogram(*vfhs, 300); //设置的很坐标长度，该值越大，则显示的越细致
+	plotter.setBackgroundColor(10, 10, 10);
 	plotter.plot();
 
 	return 0;

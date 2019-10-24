@@ -12,3 +12,5 @@ add_subdirectory(3_NormalEstimateIntegralImages)
 add_subdirectory(4_PFHEstimate)
 add_subdirectory(5_FPFHEstimate)
 add_subdirectory(6_VFHEstimate)
+add_subdirectory(7_NARFEstimate)
+
