@@ -12,6 +12,7 @@ add_subdirectory(4_ProjectInliers)
 # add_subdirectory(5_BilateralFilter)
 add_subdirectory(6_ExtractIndices)
 add_subdirectory(7_OutlinerRemoval2)
+add_subdirectory(8_RadiusOutlierRemoval)
 add_subdirectory(9_NormalRefinement)
 add_subdirectory(10_MedianFilter)
 
