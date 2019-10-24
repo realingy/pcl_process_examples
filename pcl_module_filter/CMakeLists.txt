@@ -10,6 +10,6 @@ add_subdirectory(1_PassThrough)
 add_subdirectory(2_VoxelGrid)
 add_subdirectory(3_StatisticalOutlierRemoval)
 add_subdirectory(4_ProjectInliers)
-
+add_subdirectory(5_BilateralFilter)
 
 
