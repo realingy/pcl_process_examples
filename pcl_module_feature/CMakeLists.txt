@@ -11,4 +11,4 @@ add_subdirectory(2_FeaturesDownsample)
 add_subdirectory(3_NormalEstimateIntegralImages)
 add_subdirectory(4_PFHEstimate)
 add_subdirectory(5_FPFHEstimate)
-
+add_subdirectory(6_VFHEstimate)
