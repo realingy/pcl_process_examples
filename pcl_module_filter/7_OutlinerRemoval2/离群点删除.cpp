@@ -1,10 +1,13 @@
 #include <iostream>
+#include <pcl/io/pcd_io.h>
 #include <pcl/point_types.h>
 #include <pcl/filters/radius_outlier_removal.h>
 #include <pcl/filters/conditional_removal.h>
+#include <pcl/visualization/cloud_viewer.h>  //点云可视化相关定义
 
 int main (int argc, char** argv)
 {
+	/*
 	if (argc != 2)  //确保输入的参数 
 	{
 		std::cerr << "please specify command line arg '-r' or '-c'" << std::endl;
@@ -26,7 +29,8 @@ int main (int argc, char** argv)
 		pcl::RadiusOutlierRemoval<pcl::PointXYZ> outrem;  //创建滤波器    
 		outrem.setInputCloud(cloud);    //设置输入点云
 		outrem.setRadiusSearch(0.8);     //设置半径为0.8的范围内找临近点
-		outrem.setMinNeighborsInRadius (2); //设置查询点的邻域点集数小于2的删除    // apply filter
+		outrem.setMinNeighborsInRadius (2); //设置查询点的邻域点集数小于2的删除
+		// apply filter
 		outrem.filter (*cloud_filtered);   //执行条件滤波   在半径为0.8 在此半径内必须要有两个邻居点，此点才会保存
 	} else if (strcmp(argv[1], "-c") == 0) {    
 		//创建条件限定的下的滤波器
@@ -59,6 +63,38 @@ int main (int argc, char** argv)
 	std::cerr << "    " << cloud_filtered->points[i].x << " "
 					   << cloud_filtered->points[i].y << " "
 					   << cloud_filtered->points[i].z << std::endl;
+	*/
+
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered(new pcl::PointCloud<pcl::PointXYZ>);
+
+	//定义读取对象
+	pcl::PCDReader reader;  //读取点云文件
+	reader.read<pcl::PointXYZ>("table_scene_lms400.pcd", *cloud);
+	std::cerr << "cloud before filtering: " << cloud->points.size() << std::endl;
+
+	// 在半径为0.8,在此半径内必须要有两个邻居点，此点才会保存
+	pcl::RadiusOutlierRemoval<pcl::PointXYZ> outrem;  //创建滤波器    
+	outrem.setInputCloud(cloud);    //设置输入点云
+	//outrem.setRadiusSearch(0.8);     //设置半径为0.8的范围内找临近点
+	outrem.setRadiusSearch(0.8);     //设置半径为0.8的范围内找临近点
+	//outrem.setMinNeighborsInRadius(2); //设置查询点的邻域点集数小于2的删除
+	outrem.setMinNeighborsInRadius(100); //设置查询点的邻域点集数小于2的删除
+	outrem.filter(*cloud_filtered);   //执行条件滤波
+
+	std::cerr << "cloud after filtering: " << cloud_filtered->points.size() << std::endl;
+
+	pcl::PCDWriter writer;
+	writer.write<pcl::PointXYZ>("table_scene_lms400_inliers.pcd", *cloud_filtered, false);
+
+	outrem.setNegative(true); //保留离群点
+	outrem.filter(*cloud_filtered);
+
+	writer.write<pcl::PointXYZ>("table_scene_lms400_outliers.pcd", *cloud_filtered, false);
+
+	pcl::visualization::CloudViewer viewer("Cloud Viewer"); //创建viewer对象
+	//viewer.showCloud(cloud);
+	viewer.showCloud(cloud_filtered);
 	
 	return (0);
 }
