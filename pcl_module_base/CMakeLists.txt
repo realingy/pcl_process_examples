@@ -6,4 +6,6 @@ project(PCL_MODULES_BASE)
 include_directories(${CMAKE_SOURCE_DIR}/..)
 
 add_subdirectory(1_DisplayCloudAsHeight)
+add_subdirectory(2_octree)
+add_subdirectory(3_kdtree)
 
