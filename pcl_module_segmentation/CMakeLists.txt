@@ -47,6 +47,9 @@ set(EXE_NAME_1 1_planner_segmentation)
 add_executable( ${EXE_NAME_1} 1_简单平面点云分割.cpp )
 target_link_libraries( ${EXE_NAME_1} ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
+set(EXE_NAME_2 2_cylinder_segmentation)
+add_executable( ${EXE_NAME_2} 2_圆柱体模型点云分割.cpp )
+target_link_libraries( ${EXE_NAME_2} ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
 
 # set(EXE_NAME 01_DisplayCloudAsHeight)
