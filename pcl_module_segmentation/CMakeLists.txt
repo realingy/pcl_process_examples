@@ -59,9 +59,13 @@ set(EXE_NAME_4 4_planner_segmentation_2)
 add_executable( ${EXE_NAME_4} 4_平面点云分割.cpp )
 target_link_libraries( ${EXE_NAME_4} ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
+add_executable( 5_planner_segmentation_3 5_平面提取.cpp )
+target_link_libraries( 5_planner_segmentation_3 ${OpenCV_LIBS} ${PCL_LIBRARIES})
+
 
 # set(EXE_NAME 01_DisplayCloudAsHeight)
 # add_executable(${EXE_NAME} ${DIR_SRCS})
 
 # target_link_libraries(${EXE_NAME} ${PCL_LIBRARIES})
 # target_link_libraries(pcd_write_test ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES})
+

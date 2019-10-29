@@ -23,7 +23,7 @@ int main (int argc, char** argv)
 	pcl::PointCloud<pcl::PointXYZRGBA>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZRGBA>), cloud_f (new pcl::PointCloud<pcl::PointXYZRGBA>);
 	pcl::PointCloud<pcl::PointXYZRGBA>::Ptr final (new pcl::PointCloud<pcl::PointXYZRGBA>);
 	reader.read ("object_template_0.pcd", *cloud);
-	std::cout << "PointCloud before filtering has: " << cloud->points.size () << " data points." << std::endl; //*  
+	std::cout << "PointCloud before filtering has: " << cloud->points.size () << " data points." << std::endl;
 
 	// 下采样，体素叶子大小为0.01
 	pcl::VoxelGrid<pcl::PointXYZRGBA> vg;
@@ -31,7 +31,7 @@ int main (int argc, char** argv)
 	vg.setInputCloud (cloud);
 	vg.setLeafSize (0.01f, 0.01f, 0.01f);
 	vg.filter (*cloud_filtered);
-	std::cout << "PointCloud after filtering has: " << cloud_filtered->points.size ()  << " data points." << std::endl; //*
+	std::cout << "PointCloud after filtering has: " << cloud_filtered->points.size () << " data points." << std::endl;
 
 	pcl::ModelCoefficients::Ptr coefficients (new pcl::ModelCoefficients);
 	pcl::PointIndices::Ptr inliers (new pcl::PointIndices);  
