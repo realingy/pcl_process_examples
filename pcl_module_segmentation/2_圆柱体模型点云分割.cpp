@@ -22,7 +22,6 @@ int main (int argc, char** argv)
 	pcl::ExtractIndices<pcl::Normal> extract_normals;    ///点提取对象
 	pcl::search::KdTree<PointT>::Ptr tree (new pcl::search::KdTree<PointT> ()); 
 
-
 	pcl::PointCloud<PointT>::Ptr cloud (new pcl::PointCloud<PointT>);
 	pcl::PointCloud<PointT>::Ptr cloud_filtered (new pcl::PointCloud<PointT>);
 	pcl::PointCloud<pcl::Normal>::Ptr cloud_normals (new pcl::PointCloud<pcl::Normal>);
@@ -30,9 +29,11 @@ int main (int argc, char** argv)
 	pcl::PointCloud<pcl::Normal>::Ptr cloud_normals2 (new pcl::PointCloud<pcl::Normal>);
 	pcl::ModelCoefficients::Ptr coefficients_plane (new pcl::ModelCoefficients), coefficients_cylinder (new pcl::ModelCoefficients);
 	pcl::PointIndices::Ptr inliers_plane (new pcl::PointIndices), inliers_cylinder (new pcl::PointIndices);  // Read in the cloud data
-	reader.read ("table_scene_mug_stereo_textured.pcd", *cloud);  std::cerr << "PointCloud has: " << cloud->points.size () << " data points." << std::endl;  
+	reader.read ("table_scene_mug_stereo_textured.pcd", *cloud);
+	std::cerr << "PointCloud has: " << cloud->points.size () << " data points." << std::endl;  
 
-	// 直通滤波，将Z轴不在（0，1.5）范围的点过滤掉，将剩余的点存储到cloud_filtered对象中  pass.setInputCloud (cloud);
+	// 直通滤波，将Z轴不在（0，1.5）范围的点过滤掉，将剩余的点存储到cloud_filtered对象中
+	pass.setInputCloud(cloud);
 	pass.setFilterFieldName ("z");
 	pass.setFilterLimits (0, 1.5);
 	pass.filter (*cloud_filtered);
@@ -73,12 +74,14 @@ int main (int argc, char** argv)
 	extract_normals.filter (*cloud_normals2);  
 
 	// Create the segmentation object for cylinder segmentation and set all the parameters
-	seg.setOptimizeCoefficients (true);   //设置对估计模型优化  seg.setModelType (pcl::SACMODEL_CYLINDER);  //设置分割模型为圆柱形
+	seg.setOptimizeCoefficients (true);   //设置对估计模型优化
+	seg.setModelType (pcl::SACMODEL_CYLINDER);  //设置分割模型为圆柱形
 	seg.setMethodType (pcl::SAC_RANSAC);       //参数估计方法
 	seg.setNormalDistanceWeight (0.1);       //设置表面法线权重系数
 	seg.setMaxIterations (10000);              //设置迭代的最大次数10000
 	seg.setDistanceThreshold (0.05);         //设置内点到模型的距离允许最大值
-	seg.setRadiusLimits (0, 0.1);             //设置估计出的圆柱模型的半径的范围  seg.setInputCloud (cloud_filtered2);
+	seg.setRadiusLimits (0, 0.1);             //设置估计出的圆柱模型的半径的范围
+	seg.setInputCloud (cloud_filtered2);
 	seg.setInputNormals (cloud_normals2);  
 
 	// Obtain the cylinder inliers and coefficients

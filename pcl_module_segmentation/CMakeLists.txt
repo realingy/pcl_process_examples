@@ -51,6 +51,10 @@ set(EXE_NAME_2 2_cylinder_segmentation)
 add_executable( ${EXE_NAME_2} 2_圆柱体模型点云分割.cpp )
 target_link_libraries( ${EXE_NAME_2} ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
+set(EXE_NAME_3 3_cluster_segmentation)
+add_executable( ${EXE_NAME_3} 3_聚类点云分割.cpp )
+target_link_libraries( ${EXE_NAME_3} ${OpenCV_LIBS} ${PCL_LIBRARIES})
+
 
 # set(EXE_NAME 01_DisplayCloudAsHeight)
 # add_executable(${EXE_NAME} ${DIR_SRCS})
