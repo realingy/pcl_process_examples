@@ -49,6 +49,8 @@ target_link_libraries( 1_UniformSampling ${OpenCV_LIBS} ${PCL_LIBRARIES})
 add_executable( 2_Upsampling 2_上采样.cpp )
 target_link_libraries( 2_Upsampling ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
+add_executable( 3_SurfaceReconstruction 3_表面重建.cpp )
+target_link_libraries( 3_SurfaceReconstruction ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
 # set(EXE_NAME 01_DisplayCloudAsHeight)
 # add_executable(${EXE_NAME} ${DIR_SRCS})
