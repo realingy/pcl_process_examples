@@ -1,3 +1,4 @@
+// ./range_image_border_extraction - m
 #include <iostream>
 #include <boost/thread/thread.hpp>
 #include <pcl/range_image/range_image.h>
