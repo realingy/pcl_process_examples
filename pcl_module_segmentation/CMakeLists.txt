@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(pointcloud_segmentation_demos)
+project(pcl_module_segmentation)
 
 set( CMAKE_CXX_FLAGS "-std=c++11" )
 set( CMAKE_CXX_FLAGS "/EHsc ${CMAKE_CXX_FLAGS}" )
@@ -62,6 +62,8 @@ target_link_libraries( ${EXE_NAME_4} ${OpenCV_LIBS} ${PCL_LIBRARIES})
 add_executable( 5_planner_segmentation_3 5_平面提取.cpp )
 target_link_libraries( 5_planner_segmentation_3 ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
+add_executable( 6_euclidean_cluster_extract 6_欧式分割.cpp )
+target_link_libraries( 6_euclidean_cluster_extract ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
 # set(EXE_NAME 01_DisplayCloudAsHeight)
 # add_executable(${EXE_NAME} ${DIR_SRCS})
