@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 # 工程信息
-project(PCL_PROJECT_FILTER)
+project(pcl_module_filter)
 
 include_directories(${CMAKE_SOURCE_DIR}/..)
 

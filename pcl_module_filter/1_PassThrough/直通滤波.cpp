@@ -44,10 +44,22 @@ int main()
 	pcl::io::savePCDFile<pcl::PointXYZ>("filter.pcd", *cloud_filter);
 	cout << "there are " << cloud_filter->points.size() << " points after filtering." << endl;
 
-	pcl::visualization::CloudViewer viewer("Cloud Viewer"); //创建viewer对象
+	//pcl::visualization::CloudViewer viewer("Cloud Viewer"); //创建viewer对象
 	// viewer.showCloud(cloud);
-	viewer.showCloud(cloud_filter);
+	//viewer.showCloud(cloud_filter);
 
+	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer(new pcl::visualization::PCLVisualizer("3D Viewer"));
+	viewer->initCameraParameters();
+	int v1(0); //视口号
+	viewer->createViewPort(0.0, 0.0, 0.5, 1.0, v1);
+	int v2(0); //视口号
+	viewer->createViewPort(0.5, 0.0, 1.0, 1.0, v2);
+	viewer->setBackgroundColor(255, 0, 255, v1);
+	viewer->setBackgroundColor(0, 255, 255, v2);
+	viewer->addPointCloud(cloud, "cloud", v1);
+	viewer->addPointCloud(cloud_filter, "cloud_filter", v2);
+	viewer->addCoordinateSystem();
+	viewer->spin();
 
 	/****************************************************************************************
 	*****************************************************************************************
