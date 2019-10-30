@@ -71,6 +71,9 @@ target_link_libraries( 7_conditional_euclidean_cluster ${OpenCV_LIBS} ${PCL_LIBR
 add_executable( 8_min_cut_segmentation 8_最小分割.cpp )
 target_link_libraries( 8_min_cut_segmentation ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
+add_executable( 9_region_growing_segmentation 9_区域生长点云分割.cpp )
+target_link_libraries( 9_region_growing_segmentation ${OpenCV_LIBS} ${PCL_LIBRARIES})
+
 # set(EXE_NAME 01_DisplayCloudAsHeight)
 # add_executable(${EXE_NAME} ${DIR_SRCS})
 
