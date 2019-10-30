@@ -66,9 +66,6 @@ include_directories(${OpenCV_DIR}/install/include/opencv2)
 add_executable( 1_Visualizer 可视化工具类.cpp )
 target_link_libraries( 1_Visualizer ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
+add_executable( 2_MultiViewerPort 多点云可视化窗口.cpp )
+target_link_libraries( 2_MultiViewerPort ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
-# set(EXE_NAME 01_DisplayCloudAsHeight)
-# add_executable(${EXE_NAME} ${DIR_SRCS})
-
-# target_link_libraries(${EXE_NAME} ${PCL_LIBRARIES})
-# target_link_libraries(pcd_write_test ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES})
