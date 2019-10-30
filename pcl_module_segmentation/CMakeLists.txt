@@ -43,36 +43,39 @@ include_directories(${OpenCV_DIR}/install/include/opencv2)
 # 查找源文件
 # aux_source_directory(. DIR_SRCS)
 
-set(EXE_NAME_1 1_planner_segmentation)
+set(EXE_NAME_1 01_planner_segmentation)
 add_executable( ${EXE_NAME_1} 1_简单平面点云分割.cpp )
 target_link_libraries( ${EXE_NAME_1} ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
-set(EXE_NAME_2 2_cylinder_segmentation)
+set(EXE_NAME_2 02_cylinder_segmentation)
 add_executable( ${EXE_NAME_2} 2_圆柱体模型点云分割.cpp )
 target_link_libraries( ${EXE_NAME_2} ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
-set(EXE_NAME_3 3_cluster_segmentation)
+set(EXE_NAME_3 03_cluster_segmentation)
 add_executable( ${EXE_NAME_3} 3_聚类点云分割.cpp )
 target_link_libraries( ${EXE_NAME_3} ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
-set(EXE_NAME_4 4_planner_segmentation_2)
+set(EXE_NAME_4 04_planner_segmentation_2)
 add_executable( ${EXE_NAME_4} 4_平面点云分割.cpp )
 target_link_libraries( ${EXE_NAME_4} ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
-add_executable( 5_planner_segmentation_3 5_平面提取.cpp )
-target_link_libraries( 5_planner_segmentation_3 ${OpenCV_LIBS} ${PCL_LIBRARIES})
+add_executable( 05_planner_segmentation_3 5_平面提取.cpp )
+target_link_libraries( 05_planner_segmentation_3 ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
-add_executable( 6_euclidean_cluster_extract 6_欧式分割.cpp )
-target_link_libraries( 6_euclidean_cluster_extract ${OpenCV_LIBS} ${PCL_LIBRARIES})
+add_executable( 06_euclidean_cluster_extract 6_欧式分割.cpp )
+target_link_libraries( 06_euclidean_cluster_extract ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
-add_executable( 7_conditional_euclidean_cluster 7_条件欧式分割.cpp )
-target_link_libraries( 7_conditional_euclidean_cluster ${OpenCV_LIBS} ${PCL_LIBRARIES})
+add_executable( 07_conditional_euclidean_cluster 7_条件欧式分割.cpp )
+target_link_libraries( 07_conditional_euclidean_cluster ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
-add_executable( 8_min_cut_segmentation 8_最小分割.cpp )
-target_link_libraries( 8_min_cut_segmentation ${OpenCV_LIBS} ${PCL_LIBRARIES})
+add_executable( 08_min_cut_segmentation 8_最小分割.cpp )
+target_link_libraries( 08_min_cut_segmentation ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
-add_executable( 9_region_growing_segmentation 9_区域生长点云分割.cpp )
-target_link_libraries( 9_region_growing_segmentation ${OpenCV_LIBS} ${PCL_LIBRARIES})
+add_executable( 09_region_growing_segmentation 9_区域生长点云分割.cpp )
+target_link_libraries( 09_region_growing_segmentation ${OpenCV_LIBS} ${PCL_LIBRARIES})
+
+add_executable( 10_region_growing_rgb_segmentation 10_基于颜色的区域生长点云分割.cpp )
+target_link_libraries( 10_region_growing_rgb_segmentation ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
 # set(EXE_NAME 01_DisplayCloudAsHeight)
 # add_executable(${EXE_NAME} ${DIR_SRCS})
