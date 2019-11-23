@@ -1,11 +1,11 @@
-#include <iostream>                 //标准输入输出头文件
+#include <iostream>                //标准输入输出头文件
 #include <pcl/io/pcd_io.h>         //I/O操作头文件
-#include <pcl/point_types.h>        //点类型定义头文件
-#include <pcl/registration/icp.h>   //ICP配准类相关头文件
+#include <pcl/point_types.h>       //点类型定义头文件
+#include <pcl/registration/icp.h>  //ICP配准类相关头文件
 
 int main()
 {
-	//创建两个pcl::PointCloud<pcl::PointXYZ>共享指针，并初始化它们
+	// 创建两个pcl::PointCloud<pcl::PointXYZ>共享指针，并初始化它们
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_in (new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_out(new pcl::PointCloud<pcl::PointXYZ>);
 
@@ -13,7 +13,8 @@ int main()
 	cloud_in->width = 5;   //设置点云宽度
 	cloud_in->height = 1;  //设置点云为无序点
 	cloud_in->is_dense = false;
-	cloud_in->points.resize(cloud_in->width * cloud_in->height);  for (size_t i = 0; i < cloud_in->points.size(); ++i) {
+	cloud_in->points.resize(cloud_in->width * cloud_in->height);
+	for (size_t i = 0; i < cloud_in->points.size(); ++i) {
 		cloud_in->points[i].x = 1024 * rand() / (RAND_MAX + 1.0f);
 		cloud_in->points[i].y = 1024 * rand() / (RAND_MAX + 1.0f);
 		cloud_in->points[i].z = 1024 * rand() / (RAND_MAX + 1.0f);
