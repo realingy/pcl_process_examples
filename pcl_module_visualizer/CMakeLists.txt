@@ -69,3 +69,5 @@ target_link_libraries( 1_Visualizer ${OpenCV_LIBS} ${PCL_LIBRARIES})
 add_executable( 2_MultiViewerPort 多点云可视化窗口.cpp )
 target_link_libraries( 2_MultiViewerPort ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
+add_executable( 0_PoindCloudViewer 点云查看.cpp )
+target_link_libraries( 0_PoindCloudViewer ${OpenCV_LIBS} ${PCL_LIBRARIES})
