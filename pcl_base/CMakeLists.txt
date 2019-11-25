@@ -52,6 +52,9 @@ target_link_libraries( 2_Upsampling ${OpenCV_LIBS} ${PCL_LIBRARIES})
 add_executable( 3_SurfaceReconstruction 3_表面重建.cpp )
 target_link_libraries( 3_SurfaceReconstruction ${OpenCV_LIBS} ${PCL_LIBRARIES})
 
+add_executable( 4_PointCloudView 4_点云查看.cpp )
+target_link_libraries( 4_PointCloudView ${OpenCV_LIBS} ${PCL_LIBRARIES})
+
 # set(EXE_NAME 01_DisplayCloudAsHeight)
 # add_executable(${EXE_NAME} ${DIR_SRCS})
 
