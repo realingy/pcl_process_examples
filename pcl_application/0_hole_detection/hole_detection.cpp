@@ -24,7 +24,7 @@ typedef struct tagPOINT_3D
 	double y;  //mm world coordinate y  
 	double z;  //mm world coordinate z  
 	double r;
-}POINT_WORLD;
+} POINT_WORLD;
 
 class Node{
 /*
