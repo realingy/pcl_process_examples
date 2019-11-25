@@ -27,7 +27,7 @@ include_directories(${PCL_ROOT}/include/pcl-1.9)
 # 查找源文件
 aux_source_directory(. DIR_SRCS)
 
-set(EXE_NAME 06_pcd_concatenating)
+set(EXE_NAME 12_pcd_openni)
 add_executable(${EXE_NAME} ${DIR_SRCS})
 
 target_link_libraries(${EXE_NAME} ${PCL_LIBRARIES})

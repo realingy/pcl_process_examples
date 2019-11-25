@@ -1,27 +1,34 @@
-cmake_minimum_required( VERSION 2.8 )  
-set( CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}" ${CMAKE_MODULE_PATH} )  
-   
-project( sample )  
-add_executable( sample kinect2_grabber.h main.cpp )  
-set_property( DIRECTORY PROPERTY VS_STARTUP_PROJECT "sample" )  
-   
-# Find Packages  
-find_package( PCL 1.7.2 REQUIRED )  
-find_package( KinectSDK2 REQUIRED )  
-   
-if( PCL_FOUND AND KinectSDK2_FOUND )  
-  # Additional Include Directories  
-  include_directories( ${PCL_INCLUDE_DIRS} )  
-  include_directories( ${KinectSDK2_INCLUDE_DIRS} )  
-   
-  # Preprocessor Definitions  
-  add_definitions( ${PCL_DEFINITIONS} )  
-   
-  # Additional Library Directories  
-  link_directories( ${PCL_LIBRARY_DIRS} )  
-  link_directories( ${KinectSDK2_LIBRARY_DIRS} )  
-   
-  # Additional Dependencies  
-  target_link_libraries( sample ${PCL_LIBRARIES} )  
-  target_link_libraries( sample ${KinectSDK2_LIBRARIES} )  
-endif()  
+cmake_minimum_required(VERSION 3.5)
+
+# find_package(PCL 1.9 REQUIRED COMPONENTS common io)
+find_package(PCL 1.9 REQUIRED)
+
+# include_directories(${PCL_INCLUDE_DIRS})
+add_definitions(${PCL_DEFINITIONS})
+
+# 库目录
+# link_directories(${PCL_LIBRARY_DIRS})
+link_directories(${PCL_ROOT}/3rdParty/OpenNI2/Lib)
+link_directories(${PCL_ROOT}/D:/PCL 1.9.1/3rdParty/VTK/lib)
+link_directories(${PCL_ROOT}/D:/PCL 1.9.1/3rdParty/Qhull/lib)
+link_directories(${PCL_ROOT}/D:/PCL 1.9.1/3rdParty/FLANN/lib)
+link_directories(${PCL_ROOT}/D:/PCL 1.9.1/3rdParty/Boost/lib)
+link_directories(${PCL_ROOT}/D:/PCL 1.9.1/lib)
+
+# 包含目录
+include_directories(${PCL_ROOT}/3rdParty/OpenNI2/Include)
+include_directories(${PCL_ROOT}/3rdParty/VTK/include/vtk-8.1)
+include_directories(${PCL_ROOT}/3rdParty/Qhull/include)
+include_directories(${PCL_ROOT}/3rdParty/FLANN/include)
+include_directories(${PCL_ROOT}/3rdParty/Eigen/eigen3)
+include_directories(${PCL_ROOT}/3rdParty/Boost/include/boost-1_68)
+include_directories(${PCL_ROOT}/include/pcl-1.9)
+
+# 查找源文件
+aux_source_directory(. DIR_SRCS)
+
+set(EXE_NAME 09_kinect)
+add_executable(${EXE_NAME} ${DIR_SRCS})
+
+target_link_libraries(${EXE_NAME} ${PCL_LIBRARIES})
+# target_link_libraries(pcd_write_test ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES})
