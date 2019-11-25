@@ -24,7 +24,8 @@ int main()
 	FILE* fp_txt;
 	tagPOINT_3D TxtPoint;
 	vector<tagPOINT_3D> m_vTxtPoints;
-	fp_txt = fopen("rabbit.txt", "r");
+	//fp_txt = fopen("rabbit.txt", "r");
+	fp_txt = fopen("boundary.txt", "r");
 	if (fp_txt)
 	{
 		while (fscanf(fp_txt, "%lf %lf %lf", &TxtPoint.x, &TxtPoint.y, &TxtPoint.z) != EOF)
@@ -50,7 +51,7 @@ int main()
 		cloud->points[i].y = m_vTxtPoints[i].y;
 		cloud->points[i].z = m_vTxtPoints[i].z;
 	}
-	pcl::io::savePCDFileASCII("txt2pcd.pcd", *cloud);
+	pcl::io::savePCDFileASCII("boundary.pcd", *cloud);
 	//pcl::io::savePCDFile("txt2pcd.pcd", *cloud);
 	std::cerr << "Saved " << cloud->points.size() << " data points to txt2pcd.pcd." << std::endl;
 
