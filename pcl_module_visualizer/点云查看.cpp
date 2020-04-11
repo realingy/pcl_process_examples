@@ -13,7 +13,8 @@ int main()
 {
 	//1.∂¡»°µ„‘∆
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
-	if (pcl::io::loadPCDFile<pcl::PointXYZ>("boundary.pcd", *cloud) == -1)
+	//if (pcl::io::loadPCDFile<pcl::PointXYZ>("mls_points.pcd", *cloud) == -1)
+	if (pcl::io::loadPCDFile<pcl::PointXYZ>("pnts3D_pcd.pcd", *cloud) == -1)
 	{
 		PCL_ERROR("Cloudn't read file!");
 		return -1;

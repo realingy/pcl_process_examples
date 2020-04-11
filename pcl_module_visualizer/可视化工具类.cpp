@@ -75,6 +75,7 @@ boost::shared_ptr<pcl::visualization::PCLVisualizer> normalsVis(
 	viewer->addCoordinateSystem(1.0);
 	viewer->initCameraParameters();  return (viewer);
 }  //*****************绘制普通形状************************************************// 
+
 /**************************************************************************************************************
 PCL visualizer可视化类允许用户在视窗中绘制一般图元，这个类常用于显示点云处理算法的可视化结果，例如 通过可视化球体
 包围聚类得到的点云集以显示聚类结果，shapesVis函数用于实现添加形状到视窗中，添加了四种形状：从点云中的一个点到最后一个点
@@ -105,10 +106,11 @@ boost::shared_ptr<pcl::visualization::PCLVisualizer> shapesVis(pcl::PointCloud<p
 	coeffs.values.push_back(0.0);
 	coeffs.values.push_back(5.0);
 	viewer->addCone(coeffs, "cone");  return (viewer);
-}/*
+}
+
+/*
 多视角显示：PCL  visealizer可视化类允许用户通过不同的窗口（Viewport）绘制多个点云这样方便对点云比较
 viewportsVis函数演示如何用多视角来显示点云计算法线的方法结果对比*/
-
 boost::shared_ptr<pcl::visualization::PCLVisualizer> viewportsVis(
 	pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr cloud, pcl::PointCloud<pcl::Normal>::ConstPtr normals1, pcl::PointCloud<pcl::Normal>::ConstPtr normals2)
 {
@@ -131,7 +133,9 @@ boost::shared_ptr<pcl::visualization::PCLVisualizer> viewportsVis(
 	viewer->addCoordinateSystem(1.0);  //添加法线  每个视图都有一组对应的法线
 	viewer->addPointCloudNormals<pcl::PointXYZRGB, pcl::Normal>(cloud, normals1, 10, 0.05, "normals1", v1);
 	viewer->addPointCloudNormals<pcl::PointXYZRGB, pcl::Normal>(cloud, normals2, 10, 0.05, "normals2", v2);  return (viewer);
-}/*这里是处理鼠标事件的函数，每次相应鼠标时间都会回电函数，需要从event实例提取事件信息，本例中查找鼠标左键的释放事件
+}
+
+/*这里是处理鼠标事件的函数，每次相应鼠标时间都会回电函数，需要从event实例提取事件信息，本例中查找鼠标左键的释放事件
 每次响应这种事件都会在鼠标按下的位置上生成一个文本标签。*/
 unsigned int text_id = 0; void keyboardEventOccurred(const pcl::visualization::KeyboardEvent& event, void* viewer_void)
 {
@@ -144,7 +148,9 @@ unsigned int text_id = 0; void keyboardEventOccurred(const pcl::visualization::K
 		}
 		text_id = 0;
 	}
-} /* 键盘事件 我们按下哪个按键  如果按下r健   则删除前面鼠标所产生的文本标签，需要注意的是，当按下R键时 3D相机仍然会重置
+}
+
+/* 键盘事件 我们按下哪个按键  如果按下r健   则删除前面鼠标所产生的文本标签，需要注意的是，当按下R键时 3D相机仍然会重置
  所以在PCL中视窗中注册事件响应回调函数，不会覆盖其他成员对同一事件的响应*/
 void mouseEventOccurred(const pcl::visualization::MouseEvent& event, void* viewer_void)
 {
@@ -155,6 +161,7 @@ void mouseEventOccurred(const pcl::visualization::MouseEvent& event, void* viewe
 		viewer->addText("clicked here", event.getX(), event.getY(), str);
 	}
 }
+
 /*多数情况下，默认的鼠标和键盘交互设置不能满足用户的需求，用户想扩展函数的某一些功能，  比如按下键盘时保存点云的信息，或者通过鼠标确定点云的位置   interactionCustomizationVis函数进行演示如何捕捉鼠标和键盘事件，在窗口点击，将会显示一个2D的文本标签，按下r健出去文本*/
 boost::shared_ptr<pcl::visualization::PCLVisualizer> interactionCustomizationVis()
 {
@@ -171,7 +178,9 @@ int main(int argc, char** argv)
 	if (pcl::console::find_argument(argc, argv, "-h") >= 0)
 	{
 		printUsage(argv[0]);    return 0;
-	}  bool simple(false), rgb(false), custom_c(false), normals(false),
+	}
+	
+	bool simple(false), rgb(false), custom_c(false), normals(false),
 		shapes(false), viewports(false), interaction_customization(false);  if (pcl::console::find_argument(argc, argv, "-s") >= 0)
 	{
 		simple = true;

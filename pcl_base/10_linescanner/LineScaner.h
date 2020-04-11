@@ -1,11 +1,13 @@
-/*! \file LineScaner.h 
+/*!
+\file LineScaner.h 
 *this file declare the class which was designed for using the line scaner 
 */
+
 #ifndef LINESCANERH
 #define LINESCANERH
+
 #include <QObject>
 #include "InterfaceLLT_2.h"
-#include<vector>
 #include "LsLib_Export.h"
 #include <Eigen/Geometry> 
 #include <pcl/point_types.h>
@@ -13,6 +15,7 @@
 #include <pcl/common/eigen.h>
 #include <pcl/common/transforms.h>
 #include <boost/thread/mutex.hpp>
+#include <vector>
 
 #define MAX_INTERFACE_COUNT    5
 #define MAX_RESOULUTIONS       6

@@ -16,7 +16,7 @@ add_subdirectory(6_pcd_concatenating)
 add_subdirectory(7_las2pcd)
 add_subdirectory(8_pcd_ply)
 add_subdirectory(9_kinect2)
-add_subdirectory(10_linescaner)
+add_subdirectory(10_linescanner)
 # add_subdirectory(11_cloud_save)
 add_subdirectory(12_pcd_openni)
 
